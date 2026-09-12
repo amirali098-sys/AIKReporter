@@ -56,3 +56,96 @@ and automatic logging of all reports.
 ```bash
 git clone https://github.com/amirali098-sys/AIKReporter.git
 cd AIKReporter
+````
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the tool
+
+```bash
+python main.py
+```
+
+---
+
+## 🔑 First-Time Setup
+
+On the first run, you'll be asked for:
+
+1. **API ID** — Get it from [my.telegram.org](https://my.telegram.org)
+2. **API Hash** — Same place
+3. **Phone Number** — With country code (e.g. `+989123456789`)
+4. **Verification Code** — Sent to your Telegram
+5. **2FA Password** — If enabled
+
+After the first run, credentials are saved to `config.json` so you don't have
+to enter them again.
+
+---
+
+## 📁 Project Structure
+
+```text
+AIKReporter/
+├── main.py               # Entry point
+├── requirements.txt      # Dependencies
+├── README.md             # Documentation
+├── LICENSE               # MIT License
+├── .gitignore            # Git ignore rules
+│
+├── core/
+│   ├── __init__.py
+│   ├── client.py         # Telegram connection
+│   ├── reporter.py       # Reporting logic
+│   ├── config.py         # Config manager
+│   └── utils.py          # Logging & progress bar
+│
+├── ui/
+│   ├── __init__.py
+│   ├── banner.py         # ASCII art & colors
+│   └── menu.py           # Interactive menus
+│
+└── logs/
+    └── reports.log       # Auto-generated
+```
+
+---
+
+## ⚠️ Disclaimer
+
+**This tool is provided for educational and research purposes only.**
+
+* 🎓 **Educational Use Only** — AIKReporter is intended to demonstrate how Telegram's API works and how reporting mechanisms function. It is **not** designed for mass reporting, harassment, or abuse.
+* ⚖️ **User Responsibility** — The developer of this tool is **not responsible** for any misuse, damage, or legal consequences caused by this software. **You are solely responsible** for how you use it.
+* 🚫 **No Malicious Use** — Do not use this tool to:
+
+  * Harass, threaten, or target individuals or communities.
+  * Send false or malicious reports.
+  * Violate Telegram's [Terms of Service](https://telegram.org/tos) or [Community Guidelines](https://telegram.org/faq#q-what-are-your-community-guidelines).
+  * Break any local, national, or international laws.
+* 📝 **Reporting Should Be Genuine** — Only report content that **genuinely violates** Telegram's rules. False reporting may result in your own account being **banned or restricted**.
+* 🔒 **Your Account, Your Risk** — Using this tool may put your Telegram account at risk of being limited, flagged, or banned. Use at your own discretion.
+
+**By using this software, you agree that you have read and understood this disclaimer.**
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Developer
+
+**AmirAli (AIK)**
+
+* GitHub: [@amirali098-sys](https://github.com/amirali098-sys)
+
+---
+
+⭐ If you like this project, give it a star!
