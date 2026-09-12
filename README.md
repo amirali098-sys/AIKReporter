@@ -119,16 +119,15 @@ AIKReporter/
 
 **This tool is provided for educational and research purposes only.**
 
-* 🎓 **Educational Use Only** — AIKReporter is intended to demonstrate how Telegram's API works and how reporting mechanisms function. It is **not** designed for mass reporting, harassment, or abuse.
-* ⚖️ **User Responsibility** — The developer of this tool is **not responsible** for any misuse, damage, or legal consequences caused by this software. **You are solely responsible** for how you use it.
-* 🚫 **No Malicious Use** — Do not use this tool to:
-
-  * Harass, threaten, or target individuals or communities.
-  * Send false or malicious reports.
-  * Violate Telegram's [Terms of Service](https://telegram.org/tos) or [Community Guidelines](https://telegram.org/faq#q-what-are-your-community-guidelines).
-  * Break any local, national, or international laws.
-* 📝 **Reporting Should Be Genuine** — Only report content that **genuinely violates** Telegram's rules. False reporting may result in your own account being **banned or restricted**.
-* 🔒 **Your Account, Your Risk** — Using this tool may put your Telegram account at risk of being limited, flagged, or banned. Use at your own discretion.
+- 🎓 **Educational Use Only** — AIKReporter is intended to demonstrate how Telegram's API works and how reporting mechanisms function. It is **not** designed for mass reporting, harassment, or abuse.
+- ⚖️ **User Responsibility** — The developer of this tool is **not responsible** for any misuse, damage, or legal consequences caused by this software. **You are solely responsible** for how you use it.
+- 🚫 **No Malicious Use** — Do not use this tool to:
+  - Harass, threaten, or target individuals or communities.
+  - Send false or malicious reports.
+  - Violate Telegram's [Terms of Service](https://telegram.org/tos) or [Community Guidelines](https://telegram.org/faq#q-what-are-your-community-guidelines).
+  - Break any local, national, or international laws.
+- 📝 **Reporting Should Be Genuine** — Only report content that **genuinely violates** Telegram's rules. False reporting may result in your own account being **banned or restricted**.
+- 🔒 **Your Account, Your Risk** — Using this tool may put your Telegram account at risk of being limited, flagged, or banned. Use at your own discretion.
 
 **By using this software, you agree that you have read and understood this disclaimer.**
 
