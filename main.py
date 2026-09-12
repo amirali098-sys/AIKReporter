@@ -65,15 +65,12 @@ def run_report(reporter, mode):
     if method == "5":
         message = input(f"{YELLOW}Report message: {RESET}")
 
-    clear_screen()
-    show_mode_art(mode)
-
     if mode == "channel":
         reporter.report_channel(target, method, count, message)
     elif mode == "account":
         reporter.report_account(target, method, count, message)
     elif mode == "group":
-        reporter.report_channel(target, method, count, message)
+        reporter.report_group(target, method, count, message)
 
 
 def main():

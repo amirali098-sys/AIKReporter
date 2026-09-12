@@ -39,17 +39,21 @@ class Reporter:
 
     # ─── Header helper ───────────────────────────
     @staticmethod
-    def _print_header(username, reason_name, count):
+    def _print_header(title, username, reason_name, count, extra=None):
         """Print a nice colored header box"""
         print(f"{BLUE}┌─────────────────────────────────────────┐{RESET}")
+        print(f"{BLUE}│{RESET}  {YELLOW}Type   :{RESET} {GREEN}{title}{RESET}")
         print(f"{BLUE}│{RESET}  {YELLOW}Target :{RESET} {GREEN}{username}{RESET}")
+        if extra:
+            for key, value in extra.items():
+                print(f"{BLUE}│{RESET}  {YELLOW}{key:<7}:{RESET} {GREEN}{value}{RESET}")
         print(f"{BLUE}│{RESET}  {YELLOW}Reason :{RESET} {GREEN}{reason_name}{RESET}")
         print(f"{BLUE}│{RESET}  {YELLOW}Count  :{RESET} {GREEN}{count}{RESET}")
         print(f"{BLUE}└─────────────────────────────────────────┘{RESET}\n")
 
-    # ─── Report channel / group ──────────────────
+    # ─── Report channel ──────────────────────────
     def report_channel(self, username, method, count, message=""):
-        """Report a channel or group"""
+        """Report a channel"""
         clear_screen()
         show_mode_art("channel")
 
@@ -60,18 +64,18 @@ class Reporter:
             return False
 
         reason_name, reason_class = REPORT_REASONS[method]
+        reason = reason_class()
 
-        self._print_header(username, reason_name, count)
+        self._print_header("Channel", username, reason_name, count)
 
         start_time = time.time()
         success = 0
 
         for i in range(1, count + 1):
             try:
-                self.client(functions.messages.ReportRequest(
+                self.client(functions.account.ReportPeerRequest(
                     peer=entity,
-                    id=[42],
-                    option=b'',
+                    reason=reason,
                     message=message
                 ))
                 success += 1
@@ -103,7 +107,7 @@ class Reporter:
         reason_name, reason_class = REPORT_REASONS[method]
         reason = reason_class()
 
-        self._print_header(username, reason_name, count)
+        self._print_header("Account", username, reason_name, count)
 
         start_time = time.time()
         success = 0
@@ -112,6 +116,57 @@ class Reporter:
             try:
                 self.client(functions.account.ReportPeerRequest(
                     peer=peer,
+                    reason=reason,
+                    message=message
+                ))
+                success += 1
+                progress_bar(i, count, start_time=start_time)
+            except FloodWaitError as e:
+                handle_flood_wait(e)
+            except Exception as e:
+                print(f"\n{RED}[-] Error on report {i}: {e}{RESET}")
+
+        log_report(reason_name, username, success)
+        return success > 0
+
+    # ─── Report group ────────────────────────────
+    def report_group(self, username, method, count, message=""):
+        """Report a group (with extra info)"""
+        clear_screen()
+        show_mode_art("group")
+
+        try:
+            entity = self.client.get_entity(username)
+        except Exception as e:
+            print(f"{RED}[-] Error finding target: {e}{RESET}")
+            return False
+
+        # ─── Get group info (optional) ───────────
+        group_title = username
+        group_members = "Unknown"
+
+        try:
+            full = self.client(functions.channels.GetFullChannelRequest(entity))
+            group_title = full.chats[0].title
+            group_members = getattr(full.full_chat, "participants_count", "Unknown")
+        except Exception:
+            pass
+
+        reason_name, reason_class = REPORT_REASONS[method]
+        reason = reason_class()
+
+        self._print_header(
+            "Group", username, reason_name, count,
+            extra={"Name": group_title, "Members": group_members}
+        )
+
+        start_time = time.time()
+        success = 0
+
+        for i in range(1, count + 1):
+            try:
+                self.client(functions.account.ReportPeerRequest(
+                    peer=entity,
                     reason=reason,
                     message=message
                 ))
