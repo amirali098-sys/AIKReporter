@@ -34,17 +34,17 @@ and automatic logging of all reports.
 
 ## 📋 Report Reasons
 
-| # | Reason |
-|---|--------|
-| 1 | Spam |
-| 2 | Pornography |
-| 3 | Violence |
-| 4 | Child Abuse |
-| 5 | Other |
-| 6 | Copyright |
-| 7 | Fake |
-| 8 | Geo Irrelevant |
-| 9 | Illegal Drugs |
+| #  | Reason           |
+|----|------------------|
+| 1  | Spam             |
+| 2  | Pornography      |
+| 3  | Violence         |
+| 4  | Child Abuse      |
+| 5  | Other            |
+| 6  | Copyright        |
+| 7  | Fake             |
+| 8  | Geo Irrelevant   |
+| 9  | Illegal Drugs    |
 | 10 | Personal Details |
 
 ---
