@@ -16,7 +16,6 @@ from ui.banner import (
 )
 
 
-# ─── Report reasons dictionary ───────────────────
 REPORT_REASONS = {
     "1": ("Spam",              types.InputReportReasonSpam),
     "2": ("Pornography",       types.InputReportReasonPornography),
@@ -37,7 +36,6 @@ class Reporter:
     def __init__(self, client):
         self.client = client
 
-    # ─── Header helper ───────────────────────────
     @staticmethod
     def _print_header(title, username, reason_name, count, extra=None):
         """Print a nice colored header box"""
@@ -51,6 +49,24 @@ class Reporter:
         print(f"{BLUE}│{RESET}  {YELLOW}Count  :{RESET} {GREEN}{count}{RESET}")
         print(f"{BLUE}└─────────────────────────────────────────┘{RESET}\n")
 
+    def _get_entity_info(self, entity):
+        """Get info (name, members, about) for channel/group"""
+        title = "Unknown"
+        members = "Unknown"
+        about = ""
+
+        try:
+            full = self.client(functions.channels.GetFullChannelRequest(entity))
+            title = full.chats[0].title
+            members = getattr(full.full_chat, "participants_count", "Unknown")
+            about = getattr(full.full_chat, "about", "") or ""
+            if len(about) > 30:
+                about = about[:30] + "..."
+        except Exception:
+            pass
+
+        return title, members, about
+
     # ─── Report channel ──────────────────────────
     def report_channel(self, username, method, count, message=""):
         """Report a channel"""
@@ -63,10 +79,15 @@ class Reporter:
             print(f"{RED}[-] Error finding target: {e}{RESET}")
             return False
 
+        title, members, about = self._get_entity_info(entity)
+
         reason_name, reason_class = REPORT_REASONS[method]
         reason = reason_class()
 
-        self._print_header("Channel", username, reason_name, count)
+        self._print_header(
+            "Channel", username, reason_name, count,
+            extra={"Name": title, "Members": members, "About": about}
+        )
 
         start_time = time.time()
         success = 0
@@ -131,7 +152,7 @@ class Reporter:
 
     # ─── Report group ────────────────────────────
     def report_group(self, username, method, count, message=""):
-        """Report a group (with extra info)"""
+        """Report a group"""
         clear_screen()
         show_mode_art("group")
 
@@ -141,23 +162,14 @@ class Reporter:
             print(f"{RED}[-] Error finding target: {e}{RESET}")
             return False
 
-        # ─── Get group info (optional) ───────────
-        group_title = username
-        group_members = "Unknown"
-
-        try:
-            full = self.client(functions.channels.GetFullChannelRequest(entity))
-            group_title = full.chats[0].title
-            group_members = getattr(full.full_chat, "participants_count", "Unknown")
-        except Exception:
-            pass
+        title, members, about = self._get_entity_info(entity)
 
         reason_name, reason_class = REPORT_REASONS[method]
         reason = reason_class()
 
         self._print_header(
             "Group", username, reason_name, count,
-            extra={"Name": group_title, "Members": group_members}
+            extra={"Name": title, "Members": members, "About": about}
         )
 
         start_time = time.time()
