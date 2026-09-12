@@ -54,5 +54,5 @@ and automatic logging of all reports.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AIKReporter.git
+git clone https://github.com/amirali098-sys/AIKReporter.git
 cd AIKReporter
