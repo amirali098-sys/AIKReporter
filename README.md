@@ -20,6 +20,12 @@ and automatic logging of all reports.
 
 ---
 
+## 📸 Screenshot
+
+![AIKReporter Main Menu](screenshots/menu.png)
+
+---
+
 ## ✨ Features
 
 - 🎨 Clean colored terminal interface
